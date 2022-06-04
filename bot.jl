@@ -3,20 +3,19 @@ using DotEnv
 
 DotEnv.config()
 
-# Create a client.
+f = open("pipi.txt", "r")
+pipi = readline(f)
+close(f)
+
 c = Client(ENV["TOKEN"]; presence=(game=(name="with Discord.jl", type=AT_GAME),))
 
-# Create a handler for the MessageCreate event.
 function handler(c::Client, e::MessageCreate)
-    # Display the message contents.
-    println("Received message: $(e.message.content)")
-    # Add a reaction to the message.
-    create(c, Reaction, e.message, '👍')
+    if e.message.author.bot !== true && occursin("pipi", lowercase(e.message.content))
+        reply(c, e.message, pipi)
+    end
 end
 
-# Add the handler.
 add_handler!(c, MessageCreate, handler)
-# Log in to the Discord gateway.
+
 open(c)
-# Wait for the client to disconnect.
 wait(c)
