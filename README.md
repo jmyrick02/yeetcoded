@@ -2,6 +2,6 @@
 
 a discord bot.
 
-put whatever without any structure, "we" decided on julia.jl as library but whatever gets pushed first honestly
+set the bot token in the `.env` file and run `bot.jl` to start it.
 
 https://github.com/Xh4H/Discord.jl
